@@ -18,4 +18,20 @@ Collection of various hardware projects I've made this past year. Please also ch
 ## Power and control Wiring
 Please refer to the Power and Control image for design specifics; however, here is a brief overview. 
 #### Pico-W 
-This microcontroller handles the main functionality for skateboards throttle control. The approach I took was to recieve a "Throttle On" signal from the 
+This microcontroller handles the main functionality for skateboards throttle control. The approach I took was to recieve a "Throttle On" signal from the HC-05. When the input arrives, we send out a 3.3V signal from Pin 34 into the LM358 OP-AMP (powered by 9v) to boost the signal to 5v, which is then sent to the ESC's variable potentiometer. Because we only can send 5v, the throttle control is limited to Full or Off. As mentioned earlier, I will be converting this to run the 5v signal into a DAC or other external device to convert the signal into a PWM signal that can vary the throttle, but for a prototype this worked fine. 
+
+#### HC-05 
+The bluetooth module communicates with a very basic app I built using MIT's App Inventor. The app sends out the aformentioned "Throttle On" signal which the HC-05 then transmits to the PicoW's UDART1 RX port. Power is supplied to this module via the PicoW; however, the HC-05 requires 3.6V and the PicoW is only capable of supplying 3.3V. Because of this, I've used the second channel on the LM358 to boost the signal 1.1x to 3.6V. 
+
+#### ESC
+
+The ESC I've chosen to use is capable of handling the massive 36v supplied by the battery and demanded by the motor for full power. The ESC was one of the few that I've found for less than $20 which was also equipped with an onboard hallsensor. Though it's currently not being used, I'd like to revise my design to add more accurate speed data and throttle control. That beign said, with the current implimentation I've been able to achieve aproximately 15mph and could likely go faster, though because I'm using a standard 8.25" deck with a narraw wheel base stability became a huge concern.   
+
+
+### Troubles and things to change 
+
+* Adding hall sensor functionality for accurate motor control
+* Cleaning up the signals - The pico's signals (escpecially when powered by a 9v that's stepped down) are very noisy to say the least. This has led to many instances where the motor will suddenly cut out
+* Adding variable throttle through the use of PWM signaling and alterations of the code
+* Finding a seperate bluetooth remote that has a potentiometer for variable control (Tired of risking my phone just to skate 😅) 
+
