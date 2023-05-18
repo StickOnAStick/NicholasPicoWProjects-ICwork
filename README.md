@@ -29,9 +29,11 @@ The ESC I've chosen to use is capable of handling the massive 36v supplied by th
 
 
 ### Troubles and things to change 
-
-* Adding hall sensor functionality for accurate motor control
+* Flesh out the MicroPython code - As is, the throttle control is very janky. Whenever you release the throttle it will turn the motor off completely. Resulting in you needing to tap the throttle to get it slow down smoothly. 
+* Adding hall sensor functionality for motor more motor data refinement
 * Cleaning up the signals - The pico's signals (escpecially when powered by a 9v that's stepped down) are very noisy to say the least. This has led to many instances where the motor will suddenly cut out
 * Adding variable throttle through the use of PWM signaling and alterations of the code
 * Finding a seperate bluetooth remote that has a potentiometer for variable control (Tired of risking my phone just to skate 😅) 
 
+# Conclusion
+For a small side project that only took three days to build and debug, it turned out alright. Obviously there's a lot to improve upon, but I'd wanted the experience before I began my microcontroller courses not afterwards. It was a nice challenge and learning experience; though I must say on a personal note, it's quite disgusting to look at now that I've taken formal circuit courses. Might go back and rework this in my sparetime from my Aux-Battles startup, however I don't use the board much due to weight and having my car in SJ now. 
